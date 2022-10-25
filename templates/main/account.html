@@ -1,0 +1,105 @@
+{% extends "main/base.html" %}
+
+{% block title %}Account{% endblock %}
+
+{% block content %}
+
+    <img class="page_image_account" alt="">
+
+    {% if user.is_authenticated %}
+        <div class="header">
+            <div class="header_container">
+                <nav class="nav">
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/">
+                            <img class="header_logo_main_mg" src="/static/main/img/header/home.png" alt="" title="Главная страница">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/account/send/">
+                            <img class="header_logo_main" src="/static/main/img/header/post.png" alt="" title="Пополнить счёт">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/account/story/">
+                            <img class="header_logo_main" src="/static/main/img/header/story.png" alt="" title="История транзакцый">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/account/post/">
+                            <img class="header_logo_main" src="/static/main/img/header/send.png" alt="" title="Вывести USDT">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/logout/">
+                            <img class="header_logo_main" src="/static/main/img/header/logout.png" alt="" title="Выход">
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="header_product">
+        <div class="form_header">
+            <img class="form_image" src="/static/main/img/authorization/money_gun_logo.png" alt="">
+            <div class="page_main_text">Твоя Учётная запись</div>
+        </div>
+    </div>
+
+    <div class="container_product">
+        <div class="container_account">
+            <div class="user_img_account">
+                <img src="/static/main/img/account/user_account.png">
+            </div>
+            <div class="user_email_account">{{ user.email }}</div>
+
+            <div class="account_user_data">
+                <div class="account_user_text"><span>На счету:</span> {{ user.money }} USDT</div>
+                <div class="account_user_text"><span>Ваша команда:</span> {{ total_ref_user }} чел.</div>
+                <div class="account_user_text"><span>Прибыль от команды:</span> {{ total_ref_money }} USDT</div>
+            </div>
+            <div class="header_referral_link">
+                <div class="form_referral_link">
+                    <img class="form_image_referral_link" src="/static/main/img/authorization/money_gun_logo.png" alt="">
+                    <div class="referral_link_text">Пригласить в команду</div>
+                    <div class="qr_code_image"><img src="{{ user.referral_link_qr_code.url }}"></div>
+                    <div class="referral_code">{{ user.referral_link }}</div>
+                    <div class="referral_link_text_redirect"><a href="https://{{ url }}/registration/{{ user.referral_link }}/">https://*/registration/{{ user.referral_link }}/</a></div>
+                </div>
+            </div>
+
+            <div class="header_referral_link">
+                <div class="form_referral_link">
+                    <img class="form_image_referral_link" src="/static/main/img/authorization/money_gun_logo.png" alt="">
+                    <div class="referral_link_text">Telegram Чат</div>
+                    <div class="button_account_telegram">
+                        <a href="https://t.me/+L7CQYncYh7QyYzQy"><img src="/static/main/img/instraction/button_telegram.png"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header_referral_link">
+                <div class="form_referral_link">
+                    <img class="form_image_referral_link" src="/static/main/img/authorization/money_gun_logo.png" alt="">
+                    <div class="referral_link_text">Тех поддержка</div>
+                    <div class="button_account_telegram">
+                        <a href="https://t.me/MoneyGunSupport"><img src="/static/main/img/instraction/button_support.png"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header_referral_link">
+                <div class="form_referral_link">
+                    <img class="form_image_referral_link" src="/static/main/img/authorization/money_gun_logo.png" alt="">
+                    <div class="referral_link_text">Хочу поменять пароль</div>
+                    <div class="account_change_password">
+                        <a class="account_change_password_link" href="/account/change_password/">Сменить пароль</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

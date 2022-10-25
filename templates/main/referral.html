@@ -1,0 +1,408 @@
+{% extends "main/base.html" %}
+
+{% load mathfilters %}
+
+{% block title %}Command{% endblock %}
+
+{% block content %}
+
+    <img class="page_image_referral" alt="">
+
+    {% if user.is_authenticated %}
+        <div class="header">
+            <div class="header_container">
+                <nav class="nav">
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/">
+                            <img class="header_logo_main_mg" src="/static/main/img/header/home.png" alt="" title="Главная страница">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/products/">
+                            <img class="header_logo_main" src="/static/main/img/header/cash.png" alt="" title="Майнинг ферма">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/information/">
+                            <img class="header_logo_main" src="/static/main/img/header/bitcoin.png" alt="" title="Информация">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/referrals/">
+                            <img class="header_logo_main" src="/static/main/img/header/referral.png" alt="" title="Команда">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/account/">
+                            <img class="header_logo_main" src="/static/main/img/header/account.png" alt="" title="Личный кабинет">
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="header_product">
+        <div class="form_header">
+            <img class="form_image" src="/static/main/img/authorization/money_gun_logo.png" alt="">
+            <div class="page_main_text">Твоя Команда</div>
+        </div>
+    </div>
+
+    <div class="container_referral">
+
+        {% for product in products %}
+            {% if product.id == 1 %}
+                <div class="main_referral">
+                    <div class="product_level">
+                        <img class="product_level_image" src="{{ product.img_product.url }}">
+                    </div>
+                    <div class="product_money">
+                        {% if user_ref_product_1 %}
+                            {% for user_ref_product in user_ref_product_1 %}
+                                <div class="product_money_text"><span class="product_money_span">Рабочая команда:</span> {{ user_ref_product.total_ref_user }} чел.</div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="product_money_text"><span class="product_money_span">Рабочая команда:</span> 0 чел.</div>
+                        {% endif %}
+                        {% if user_ref_product_1 %}
+                            {% for user_ref_product in user_ref_product_1 %}
+                                <div class="product_money_text"><span class="product_money_span">Ежедневная прибыль:</span> {{ product.money|mul:user_ref_product.total_ref_user|div:25|div:10 }} USDT</div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="product_money_text"><span class="product_money_span">Ежедневная прибыль:</span> Нет данных</div>
+                        {% endif %}
+                        {% if user_ref_product_1 %}
+                            {% for user_ref_product in user_ref_product_1 %}
+                                <div class="product_money_text"><span class="product_money_span">Общая прибыль:</span> {{ user_ref_product.total_ref_money }} USDT</div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="product_money_text"><span class="product_money_span">Общая прибыль:</span> Нет данных</div>
+                        {% endif %}
+                    </div>
+                    {% if user_ref_product_1 %}
+                        {% for user_ref_product in user_ref_product_1 %}
+                            <div class="status_product_ok">
+                                <img class src="/static/main/img/status/work_ok.png" alt="">
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="status_product_ok">
+                            <img class src="/static/main/img/status/work_not_ok.png" alt="">
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        {% for product in products %}
+            {% if product.id == 2 %}
+                <div class="main_referral">
+                    <div class="product_level">
+                        <img class="product_level_image" src="{{ product.img_product.url }}">
+                    </div>
+                    <div class="product_money">
+                        {% if user_ref_product_2 %}
+                            {% for user_ref_product in user_ref_product_2 %}
+                                <div class="product_money_text"><span class="product_money_span">Рабочая команда:</span> {{ user_ref_product.total_ref_user }} чел.</div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="product_money_text"><span class="product_money_span">Рабочая команда:</span> 0 чел.</div>
+                        {% endif %}
+                        {% if user_ref_product_2 %}
+                            {% for user_ref_product in user_ref_product_2 %}
+                                <div class="product_money_text"><span class="product_money_span">Ежедневная прибыль:</span> {{ product.money|mul:user_ref_product.total_ref_user|div:25|div:10 }} USDT</div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="product_money_text"><span class="product_money_span">Ежедневная прибыль:</span> Нет данных</div>
+                        {% endif %}
+                        {% if user_ref_product_2 %}
+                            {% for user_ref_product in user_ref_product_2 %}
+                                <div class="product_money_text"><span class="product_money_span">Общая прибыль:</span> {{ user_ref_product.total_ref_money }} USDT</div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="product_money_text"><span class="product_money_span">Общая прибыль:</span> Нет данных</div>
+                        {% endif %}
+                    </div>
+                    {% if user_ref_product_2 %}
+                        {% for user_ref_product in user_ref_product_2 %}
+                            <div class="status_product_ok">
+                                <img class src="/static/main/img/status/work_ok.png" alt="">
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="status_product_ok">
+                            <img class src="/static/main/img/status/work_not_ok.png" alt="">
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        {% for product in products %}
+            {% if product.id == 3 %}
+                <div class="main_referral">
+                    <div class="product_level">
+                        <img class="product_level_image" src="{{ product.img_product.url }}">
+                    </div>
+                    <div class="product_money">
+                        {% if user_ref_product_3 %}
+                            {% for user_ref_product in user_ref_product_3 %}
+                                <div class="product_money_text"><span class="product_money_span">Рабочая команда:</span> {{ user_ref_product.total_ref_user }} чел.</div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="product_money_text"><span class="product_money_span">Рабочая команда:</span> 0 чел.</div>
+                        {% endif %}
+                        {% if user_ref_product_3 %}
+                            {% for user_ref_product in user_ref_product_3 %}
+                                <div class="product_money_text"><span class="product_money_span">Ежедневная прибыль:</span> {{ product.money|mul:user_ref_product.total_ref_user|div:25|div:10 }} USDT</div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="product_money_text"><span class="product_money_span">Ежедневная прибыль:</span> Нет данных</div>
+                        {% endif %}
+                        {% if user_ref_product_3 %}
+                            {% for user_ref_product in user_ref_product_3 %}
+                                <div class="product_money_text"><span class="product_money_span">Общая прибыль:</span> {{ user_ref_product.total_ref_money }} USDT</div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="product_money_text"><span class="product_money_span">Общая прибыль:</span> Нет данных</div>
+                        {% endif %}
+                    </div>
+                    {% if user_ref_product_3 %}
+                        {% for user_ref_product in user_ref_product_3 %}
+                            <div class="status_product_ok">
+                                <img class src="/static/main/img/status/work_ok.png" alt="">
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="status_product_ok">
+                            <img class src="/static/main/img/status/work_not_ok.png" alt="">
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        {% for product in products %}
+            {% if product.id == 4 %}
+                <div class="main_referral">
+                    <div class="product_level">
+                        <img class="product_level_image" src="{{ product.img_product.url }}">
+                    </div>
+                    <div class="product_money">
+                        {% if user_ref_product_4 %}
+                            {% for user_ref_product in user_ref_product_4 %}
+                                <div class="product_money_text"><span class="product_money_span">Рабочая команда:</span> {{ user_ref_product.total_ref_user }} чел.</div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="product_money_text"><span class="product_money_span">Рабочая команда:</span> 0 чел.</div>
+                        {% endif %}
+                        {% if user_ref_product_4 %}
+                            {% for user_ref_product in user_ref_product_4 %}
+                                <div class="product_money_text"><span class="product_money_span">Ежедневная прибыль:</span> {{ product.money|mul:user_ref_product.total_ref_user|div:25|div:10 }} USDT</div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="product_money_text"><span class="product_money_span">Ежедневная прибыль:</span> Нет данных</div>
+                        {% endif %}
+                        {% if user_ref_product_4 %}
+                            {% for user_ref_product in user_ref_product_4 %}
+                                <div class="product_money_text"><span class="product_money_span">Общая прибыль:</span> {{ user_ref_product.total_ref_money }} USDT</div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="product_money_text"><span class="product_money_span">Общая прибыль:</span> Нет данных</div>
+                        {% endif %}
+                    </div>
+                    {% if user_ref_product_4 %}
+                        {% for user_ref_product in user_ref_product_4 %}
+                            <div class="status_product_ok">
+                                <img class src="/static/main/img/status/work_ok.png" alt="">
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="status_product_ok">
+                            <img class src="/static/main/img/status/work_not_ok.png" alt="">
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        {% for product in products %}
+            {% if product.id == 5 %}
+                <div class="main_referral">
+                    <div class="product_level">
+                        <img class="product_level_image" src="{{ product.img_product.url }}">
+                    </div>
+                    <div class="product_money">
+                        {% if user_ref_product_5 %}
+                            {% for user_ref_product in user_ref_product_5 %}
+                                <div class="product_money_text"><span class="product_money_span">Рабочая команда:</span> {{ user_ref_product.total_ref_user }} чел.</div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="product_money_text"><span class="product_money_span">Рабочая команда:</span> 0 чел.</div>
+                        {% endif %}
+                        {% if user_ref_product_5 %}
+                            {% for user_ref_product in user_ref_product_5 %}
+                                <div class="product_money_text"><span class="product_money_span">Ежедневная прибыль:</span> {{ product.money|mul:user_ref_product.total_ref_user|div:25|div:10 }} USDT</div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="product_money_text"><span class="product_money_span">Ежедневная прибыль:</span> Нет данных</div>
+                        {% endif %}
+                        {% if user_ref_product_5 %}
+                            {% for user_ref_product in user_ref_product_5 %}
+                                <div class="product_money_text"><span class="product_money_span">Общая прибыль:</span> {{ user_ref_product.total_ref_money }} USDT</div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="product_money_text"><span class="product_money_span">Общая прибыль:</span> Нет данных</div>
+                        {% endif %}
+                    </div>
+                    {% if user_ref_product_5 %}
+                        {% for user_ref_product in user_ref_product_5 %}
+                            <div class="status_product_ok">
+                                <img class src="/static/main/img/status/work_ok.png" alt="">
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="status_product_ok">
+                            <img class src="/static/main/img/status/work_not_ok.png" alt="">
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        {% for product in products %}
+            {% if product.id == 6 %}
+                <div class="main_referral">
+                    <div class="product_level">
+                        <img class="product_level_image" src="{{ product.img_product.url }}">
+                    </div>
+                    <div class="product_money">
+                        {% if user_ref_product_6 %}
+                            {% for user_ref_product in user_ref_product_6 %}
+                                <div class="product_money_text"><span class="product_money_span">Рабочая команда:</span> {{ user_ref_product.total_ref_user }} чел.</div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="product_money_text"><span class="product_money_span">Рабочая команда:</span> 0 чел.</div>
+                        {% endif %}
+                        {% if user_ref_product_6 %}
+                            {% for user_ref_product in user_ref_product_6 %}
+                                <div class="product_money_text"><span class="product_money_span">Ежедневная прибыль:</span> {{ product.money|mul:user_ref_product.total_ref_user|div:25|div:10 }} USDT</div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="product_money_text"><span class="product_money_span">Ежедневная прибыль:</span> Нет данных</div>
+                        {% endif %}
+                        {% if user_ref_product_6 %}
+                            {% for user_ref_product in user_ref_product_6 %}
+                                <div class="product_money_text"><span class="product_money_span">Общая прибыль:</span> {{ user_ref_product.total_ref_money }} USDT</div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="product_money_text"><span class="product_money_span">Общая прибыль:</span> Нет данных</div>
+                        {% endif %}
+                    </div>
+                    {% if user_ref_product_6 %}
+                        {% for user_ref_product in user_ref_product_6 %}
+                            <div class="status_product_ok">
+                                <img class src="/static/main/img/status/work_ok.png" alt="">
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="status_product_ok">
+                            <img class src="/static/main/img/status/work_not_ok.png" alt="">
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        {% for product in products %}
+            {% if product.id == 7 %}
+                <div class="main_referral">
+                    <div class="product_level">
+                        <img class="product_level_image" src="{{ product.img_product.url }}">
+                    </div>
+                    <div class="product_money">
+                        {% if user_ref_product_7 %}
+                            {% for user_ref_product in user_ref_product_7 %}
+                                <div class="product_money_text"><span class="product_money_span">Рабочая команда:</span> {{ user_ref_product.total_ref_user }} чел.</div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="product_money_text"><span class="product_money_span">Рабочая команда:</span> 0 чел.</div>
+                        {% endif %}
+                        {% if user_ref_product_7 %}
+                            {% for user_ref_product in user_ref_product_7 %}
+                                <div class="product_money_text"><span class="product_money_span">Ежедневная прибыль:</span> {{ product.money|mul:user_ref_product.total_ref_user|div:25|div:10 }} USDT</div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="product_money_text"><span class="product_money_span">Ежедневная прибыль:</span> Нет данных</div>
+                        {% endif %}
+                        {% if user_ref_product_7 %}
+                            {% for user_ref_product in user_ref_product_7 %}
+                                <div class="product_money_text"><span class="product_money_span">Общая прибыль:</span> {{ user_ref_product.total_ref_money }} USDT</div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="product_money_text"><span class="product_money_span">Общая прибыль:</span> Нет данных</div>
+                        {% endif %}
+                    </div>
+                    {% if user_ref_product_7 %}
+                        {% for user_ref_product in user_ref_product_7 %}
+                            <div class="status_product_ok">
+                                <img class src="/static/main/img/status/work_ok.png" alt="">
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="status_product_ok">
+                            <img class src="/static/main/img/status/work_not_ok.png" alt="">
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        {% for product in products %}
+            {% if product.id == 8 %}
+                <div class="main_referral">
+                    <div class="product_level">
+                        <img class="product_level_image" src="{{ product.img_product.url }}">
+                    </div>
+                    <div class="product_money">
+                        {% if user_ref_product_8 %}
+                            {% for user_ref_product in user_ref_product_8 %}
+                                <div class="product_money_text"><span class="product_money_span">Рабочая команда:</span> {{ user_ref_product.total_ref_user }} чел.</div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="product_money_text"><span class="product_money_span">Рабочая команда:</span> 0 чел.</div>
+                        {% endif %}
+                        {% if user_ref_product_8 %}
+                            {% for user_ref_product in user_ref_product_8 %}
+                                <div class="product_money_text"><span class="product_money_span">Ежедневная прибыль:</span> {{ product.money|mul:user_ref_product.total_ref_user|div:25|div:10 }} USDT</div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="product_money_text"><span class="product_money_span">Ежедневная прибыль:</span> Нет данных</div>
+                        {% endif %}
+                        {% if user_ref_product_8 %}
+                            {% for user_ref_product in user_ref_product_8 %}
+                                <div class="product_money_text"><span class="product_money_span">Общая прибыль:</span> {{ user_ref_product.total_ref_money }} USDT</div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="product_money_text"><span class="product_money_span">Общая прибыль:</span> Нет данных</div>
+                        {% endif %}
+                    </div>
+                    {% if user_ref_product_8 %}
+                        {% for user_ref_product in user_ref_product_8 %}
+                            <div class="status_product_ok">
+                                <img class src="/static/main/img/status/work_ok.png" alt="">
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="status_product_ok">
+                            <img class src="/static/main/img/status/work_not_ok.png" alt="">
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

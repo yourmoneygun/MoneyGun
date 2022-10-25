@@ -1,0 +1,121 @@
+{% extends "main/base.html" %}
+
+{% block title %}Account{% endblock %}
+
+{% block content %}
+
+    <img class="instruction_fon_img" alt="">
+
+    {% if user.is_authenticated %}
+        <div class="header">
+            <div class="header_container">
+                <nav class="nav">
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/">
+                            <img class="header_logo_main_mg" src="/static/main/img/header/home.png" alt="" title="Главная страница">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/account/send/">
+                            <img class="header_logo_main" src="/static/main/img/header/post.png" alt="" title="Пополнить счёт">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/account/story/">
+                            <img class="header_logo_main" src="/static/main/img/header/story.png" alt="" title="История транзакцый">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/account/post/">
+                            <img class="header_logo_main" src="/static/main/img/header/send.png" alt="" title="Вывести USDT">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/logout/">
+                            <img class="header_logo_main" src="/static/main/img/header/logout.png" alt="" title="Выход">
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="header_product">
+        <div class="form_header">
+            <img class="form_image" src="/static/main/img/authorization/money_gun_logo.png" alt="">
+            <div class="page_main_text">Инструкция</div>
+        </div>
+    </div>
+
+    <div class="instruction_wrapper">
+        <div class="header_instruction">
+            <img class="form_image_referral_link" src="/static/main/img/authorization/money_gun_logo.png" alt="">
+            <div class="referral_link_text">Пополнить USDT</div>
+        </div>
+        <div class="main_instruction">
+            <img src="/static/main/img/instraction/phone_post.png">
+            <div class="instruction_wrapper_text">
+                <div class="instruction_text"><li>Скачать криптокошелёк Trustee Wallet</li></div>
+                <div class="instruction_text"><li>Пополнить счёт USDT</li></div>
+                <div class="instruction_text"><li>Перевести USDT на кошелёк:</li></div>
+                <div class="instruction_text_span">" TXS5UuVoAJxZAzog9Hpii3kKoyGmTygVzd "</div>
+                <div class="instruction_text"><li>Заполнить форму и нажать " Я ОПЛАТИЛ "</li></div>
+            </div>
+        </div>
+
+        <div class="header_instruction">
+            <img class="form_image_referral_link" src="/static/main/img/authorization/money_gun_logo.png" alt="">
+            <div class="referral_link_text">Вывести USDT</div>
+        </div>
+        <div class="main_instruction">
+            <div class="instruction_wrapper_text">
+                <div class="instruction_text"><li>Скачать криптокошелёк Trustee Wallet</li></div>
+                <div class="instruction_text"><li>Заполнить форму для вывода</li></div>
+                <div class="instruction_text"><li>Нажать кнопку " ВЫВЕСТИ "</li></div>
+                <div class="instruction_text_span_li">
+                    <div class="instruction_li">Комиссия за вывод составляет</div>
+                    <div class="instruction_li">15% от суммы вывода!</div>
+                </div>
+            </div>
+            <img src="/static/main/img/instraction/phone_send.png">
+        </div>
+
+        <div class="header_instruction">
+            <img class="form_image_referral_link" src="/static/main/img/authorization/money_gun_logo.png" alt="">
+            <div class="referral_link_text">Скачать Trustee Wallet</div>
+        </div>
+        <div class="main_instruction">
+            <div class="main_download_wallet">
+                <a class="download_wallet" href="https://apps.apple.com/ru/app/trustee-wallet-%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%BE-%D0%BA%D0%BE%D1%88%D0%B5%D0%BB%D1%91%D0%BA/id1462924276"><img src="/static/main/img/instraction/app_store.png"></a>
+                <a class="download_wallet" href="https://play.google.com/store/apps/details?id=com.trusteewallet&hl=ru&gl=US"><img src="/static/main/img/instraction/google_play.png"></a>
+            </div>
+        </div>
+
+        <div class="header_instruction">
+            <img class="form_image_referral_link" src="/static/main/img/authorization/money_gun_logo.png" alt="">
+            <div class="referral_link_text">Как проводятся транзакции</div>
+        </div>
+        <div class="main_instruction">
+            <img src="/static/main/img/instraction/phone_transaction.png">
+            <div class="instruction_wrapper_text">
+                <div class="instruction_text"><li>Рабочее время: Пн-Сб 9:00 - 20:00 (по Киеву)</li></div>
+                <div class="instruction_text"><li>Зачисление производится в течении 30 минут</li></div>
+                <div class="instruction_text"><li>Вывод производится в течении 30 минут</li></div>
+                <div class="instruction_text"><li>Если прошло больше 30 минут, пожалуйста,</li></div>
+                <div class="instruction_text">обратитесь в службу поддержки!</div>
+            </div>
+        </div>
+
+        <div class="header_instruction">
+            <img class="form_image_referral_link" src="/static/main/img/authorization/money_gun_logo.png" alt="">
+            <div class="referral_link_text">Служба поддержки</div>
+        </div>
+        <div class="main_instruction">
+            <div class="instruction_support">
+                <a href="https://t.me/MoneyGunSupport"><img src="/static/main/img/instraction/button_support.png"></a>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

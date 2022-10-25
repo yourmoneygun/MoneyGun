@@ -1,0 +1,42 @@
+{% extends "main/base.html" %}
+
+{% block title %}MONEY GUN | Логин{% endblock %}
+
+{% block content %}
+
+    <img class="transaction_send_fon_img" alt="">
+        <div class="main_container">
+            <div class="form_container">
+                <form class="form_box" method="post">
+                    <div class="form_header">
+                        <img class="form_image" src="/main/img/authorization/money_gun_logo.png" alt="">
+                        <div class="form_main_text">Транзакция</div>
+
+                            {% if pk.transaction_name == 'send' %}
+                                <div class="img_transaction_useruser">
+                                    <img src="/main/img/transaction/send_transaction.png" alt="">
+                                </div>
+                            {% else %}
+                                <div class="img_transaction_useruser">
+                                    <img src="/main/img/transaction/post_transaction.png" alt="">
+                                </div>
+                            {% endif %}
+
+                        <div class="text_transaction_processing">{{ user.email }}</div>
+                        <div class="text_transaction_processing">ID: {{ pk.transaction_num }}</div>
+                        <div class="text_transaction_processing">Кошелёк: {{ pk.wallet }}</div>
+                        <div class="text_transaction_processing">Сумма: {{ pk.money }} USDT</div>
+                    </div>
+                    {% csrf_token %}
+                    {{ form.money }}
+                    <div class="button_superuser">
+                        <input class="button_yes_superuser" type="submit" value="ДА">
+                        <a href="/transaction_processing_unsuccess/{{ pk.id }}/" class="button_not_superuser">НЕТ</a>
+                    </div>
+                    <a href="/transaction_processing/" class="form_forgot_link">Транзакции</a>
+
+                </form>
+            </div>
+        </div>
+
+{% endblock %}

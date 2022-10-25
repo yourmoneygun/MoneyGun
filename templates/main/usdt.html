@@ -1,0 +1,55 @@
+{% extends "main/base.html" %}
+
+{% block title %}Account{% endblock %}
+
+{% block content %}
+
+    <img class="main_fon_usdt_img" alt="">
+
+    {% if user.is_authenticated %}
+        <div class="header">
+            <div class="header_container">
+                <nav class="nav">
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/">
+                            <img class="header_logo_main_mg" src="/static/main/img/header/home.png" alt="" title="Главная страница">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/products/">
+                            <img class="header_logo_main" src="/static/main/img/header/cash.png" alt="" title="Майнинг ферма">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/information/">
+                            <img class="header_logo_main" src="/static/main/img/header/bitcoin.png" alt="" title="Информация">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/referrals/">
+                            <img class="header_logo_main" src="/static/main/img/header/referral.png" alt="" title="Команда">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/account/">
+                            <img class="header_logo_main" src="/static/main/img/header/account.png" alt="" title="Личный кабинет">
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="transaction_post_container">
+        <div class="form_post_container">
+            <div class="form_header">
+                <img class="form_image" src="/static/main/img/authorization/money_gun_logo.png" alt="">
+                <div class="form_main_text">В разработке</div>
+            </div>
+            <div class="button_404">
+                <a href="/" class="form_forgot_link">Домой</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

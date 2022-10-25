@@ -1,0 +1,52 @@
+{% extends "main/base.html" %}
+
+{% block title %}Account{% endblock %}
+
+{% block content %}
+
+    <img class="page_image_product" alt="">
+
+    <div class="header_product">
+        <div class="form_header_text">
+            <img class="form_image" src="/static/main/img/authorization/money_gun_logo.png" alt="">
+            <div class="page_main_text">Все транзакции</div>
+        </div>
+    </div>
+
+    {% for transaction in user_transactions %}
+        <div class="container_transaction_story">
+            <div class="main_transaction_story">
+                {% if transaction.transaction_name == 'send' %}
+                    <div class="img_transaction_name">
+                        <img src="/static/main/img/transaction/post_transaction.png" alt="">
+                    </div>
+                {% else %}
+                    <div class="img_transaction_name">
+                        <img src="/static/main/img/transaction/send_transaction.png" alt="">
+                    </div>
+                {% endif %}
+                <div class="product_money">
+                    <div class="product_money_text"><span class="product_money_span">ID:</span> {{ transaction.transaction_num }}</div>
+                    <div class="product_money_text"><span class="product_money_span">Сумма:</span> {{ transaction.money }} USDT</div>
+                    <div class="product_money_text"><span class="product_money_span">Эл. адрес:</span> {{ transaction.user_email }}</div>
+                    <div class="product_money_text"><span class="product_money_span">Дата транзакции:</span> {{ transaction.create_transaction }}</div>
+                </div>
+                {% if transaction.status == 'in_process' %}
+                    <div class="img_transaction_name">
+                        <a class="" href="/transaction_processing/{{ transaction.id }}/"><img src="/static/main/img/status/info.png" alt=""></a>
+                    </div>
+                {% elif transaction.status == 'success' %}
+                    <div class="img_transaction_name">
+                        <img src="/static/main/img/status/ok.png" alt="">
+                    </div>
+                {% else %}
+                    <div class="img_transaction_name">
+                        <img src="/static/main/img/status/not_ok.png" alt="">
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+
+
+{% endblock %}

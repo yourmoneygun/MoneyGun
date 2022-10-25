@@ -1,0 +1,60 @@
+{% extends "main/base.html" %}
+
+{% block title %}Account{% endblock %}
+
+{% block content %}
+
+    <img class="transaction_send_fon_img" alt="">
+
+    {% if user.is_authenticated %}
+        <div class="header">
+            <div class="header_container">
+                <nav class="nav">
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/">
+                            <img class="header_logo_main_mg" src="/static/main/img/header/home.png" alt="" title="Главная страница">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/account/send/">
+                            <img class="header_logo_main" src="/static/main/img/header/post.png" alt="" title="Пополнить счёт">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/account/story/">
+                            <img class="header_logo_main" src="/static/main/img/header/story.png" alt="" title="История транзакцый">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/account/post/">
+                            <img class="header_logo_main" src="/static/main/img/header/send.png" alt="" title="Вывести USDT">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/logout/">
+                            <img class="header_logo_main" src="/static/main/img/header/logout.png" alt="" title="Выход">
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="transaction_send_container">
+        <div class="form_send_container">
+            <form class="form_box" method="post">
+                <div class="form_header">
+                    <img class="form_image" src="/static/main/img/authorization/money_gun_logo.png" alt="">
+                    <div class="form_main_text">Пополнить USDT</div>
+                </div>
+                {% csrf_token %}
+                {{ form.wallet }}
+                {{ form.money }}
+                <input class="button_transaction_input" type="submit" value="Я оплатил">
+                <a href="/account/instruction/" class="form_forgot_link"><span>!!! Инструкция пополнения USDT !!!</span></a>
+                <a href="/account/" class="form_forgot_link">Учётная запись</a>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

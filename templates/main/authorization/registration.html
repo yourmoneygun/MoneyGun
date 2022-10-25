@@ -1,0 +1,28 @@
+{% extends "main/base.html" %}
+
+{% block title %}MONEY GUN | Регистрация{% endblock %}
+
+{% block content %}
+
+    <img class="main_fon_img" alt="">
+        <div class="main_container">
+            <div class="form_container">
+                <form class="form_box" method="post">
+                    <div class="form_header">
+                        <img class="form_image" src="/static/main/img/authorization/money_gun_logo.png" alt="">
+                        <div class="form_main_text">Регистрация</div>
+                    </div>
+                    {% csrf_token %}
+                    {{ form.email.errors }}
+                    {{ form.password2.errors }}
+                    {{ form.email }}
+                    {{ form.password1 }}
+                    {{ form.password2 }}
+                    {{ form.referral_link_main_user }}
+                    <input class="button_form_input" type="submit" value="Зарегистрироваться"/>
+                    <a href="/login/" class="form_forgot_link">Войти</a>
+                </form>
+            </div>
+        </div>
+
+{% endblock %}

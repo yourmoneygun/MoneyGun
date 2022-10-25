@@ -1,0 +1,85 @@
+{% extends "main/base.html" %}
+
+{% block title %}Account{% endblock %}
+
+{% block content %}
+
+    <img class="transaction_story_fon_img" alt="">
+
+    {% if user.is_authenticated %}
+        <div class="header">
+            <div class="header_container">
+                <nav class="nav">
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/">
+                            <img class="header_logo_main_mg" src="/static/main/img/header/home.png" alt="" title="Главная страница">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/account/send/">
+                            <img class="header_logo_main" src="/static/main/img/header/post.png" alt="" title="Пополнить счёт">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/account/story/">
+                            <img class="header_logo_main" src="/static/main/img/header/story.png" alt="" title="История транзакцый">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/account/post/">
+                            <img class="header_logo_main" src="/static/main/img/header/send.png" alt="" title="Вывести USDT">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/logout/">
+                            <img class="header_logo_main" src="/static/main/img/header/logout.png" alt="" title="Выход">
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="header_product">
+        <div class="form_header_text">
+            <img class="form_image" src="/static/main/img/authorization/money_gun_logo.png" alt="">
+            <div class="page_main_text">История транзакций</div>
+        </div>
+    </div>
+
+    {% for transaction in user_transactions %}
+        <div class="container_transaction_story">
+            <div class="main_transaction_story">
+                {% if transaction.transaction_name == 'send' %}
+                    <div class="img_transaction_name">
+                        <img src="/static/main/img/transaction/post_transaction.png" alt="">
+                    </div>
+                {% else %}
+                    <div class="img_transaction_name">
+                        <img src="/static/main/img/transaction/send_transaction.png" alt="">
+                    </div>
+                {% endif %}
+                <div class="product_money">
+                    <div class="product_money_text"><span class="product_money_span">ID:</span> {{ transaction.transaction_num }}</div>
+                    <div class="product_money_text"><span class="product_money_span">Сумма:</span> {{ transaction.money }} USDT</div>
+                    <div class="product_money_text"><span class="product_money_span">Дата транзакции:</span> {{ transaction.create_transaction }}</div>
+                </div>
+                {% if transaction.status == 'in_process' %}
+                    <div class="img_transaction_name">
+                        <img src="/static/main/img/status/info.png" alt="">
+                    </div>
+                {% elif transaction.status == 'success' %}
+                    <div class="img_transaction_name">
+                        <img src="/static/main/img/status/ok.png" alt="">
+                    </div>
+                {% else %}
+                    <div class="img_transaction_name">
+                        <img src="/static/main/img/status/not_ok.png" alt="">
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+
+
+{% endblock %}

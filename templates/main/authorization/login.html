@@ -1,0 +1,26 @@
+{% extends "main/base.html" %}
+
+{% block title %}MONEY GUN | Логин{% endblock %}
+
+{% block content %}
+
+    <img class="main_fon_img" alt="">
+        <div class="main_container">
+            <div class="form_container">
+                <form class="form_box" method="post">
+                    <div class="form_header">
+                        <img class="form_image" src="/static/main/img/authorization/money_gun_logo.png" alt="">
+                        <div class="form_main_text">Логин</div>
+                    </div>
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    {{ form.username }}
+                    {{ form.password }}
+                    <input class="button_form_input" type="submit" value="Логин">
+                    <a href="/password_reset/" class="form_forgot_link">Забыли пароль?</a>
+                    <a href="/registration/" class="form_forgot_link">Зарегистрироваться</a>
+                </form>
+            </div>
+        </div>
+
+{% endblock %}

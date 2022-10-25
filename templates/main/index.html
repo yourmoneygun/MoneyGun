@@ -1,0 +1,114 @@
+{% extends "main/base.html" %}
+
+{% block title %}Money Gun{% endblock %}
+
+{% block content %}
+
+    <img class="instruction_fon_img" alt="">
+
+    {% if user.is_authenticated %}
+        <div class="header">
+            <div class="header_container">
+                <nav class="nav">
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/">
+                            <img class="header_logo_main_mg" src="/static/main/img/header/home.png" alt="" title="Главная страница">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/products/">
+                            <img class="header_logo_main" src="/static/main/img/header/cash.png" alt="" title="Майнинг ферма">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/information/">
+                            <img class="header_logo_main" src="/static/main/img/header/bitcoin.png" alt="" title="Информация">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/referrals/">
+                            <img class="header_logo_main" src="/static/main/img/header/referral.png" alt="" title="Команда">
+                        </a>
+                    </div>
+                    <div class="nav_link">
+                        <a class="nav_link_redirect" href="/account/">
+                            <img class="header_logo_main" src="/static/main/img/header/account.png" alt="" title="Личный кабинет">
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+    {% endif %}
+
+        <div class="header_product">
+            <div class="form_header">
+                <img class="form_image" src="/static/main/img/authorization/money_gun_logo.png" alt="">
+                <div class="page_main_text">Money Gun</div>
+            </div>
+        </div>
+
+        <div class="container_product">
+            <div class="main_index">
+                <div class="header_index">
+                    <img src="/static/main/img/instraction/maining_ferma_1.png">
+                    <div class="main_index_text">
+                        <div class="form_index_link">
+                            <img src="/static/main/img/authorization/money_gun_logo.png" alt="">
+                            <div class="index_link_text">О нас</div>
+                        </div>
+                        <div class="wrapper_index_text">
+                            <div class="index_header_text">Наша команда занимается майнингом на основе USDT.</div>
+                            <div class="index_header_text">Мы выбрали USDT так как он прикреплён к доллару</div>
+                            <div class="index_header_text">и считаеться самой надёжной криптовалютой.</div>
+                            <div class="index_header_text">Мы выделяем наши сервера для того, что бы и вы</div>
+                            <div class="index_header_text">тоже смогли майнить данную криптовалюту</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="wrapper_index_main_text_index">
+                    <div class="header_instruction">
+                        <img class="form_image_referral_link" src="/static/main/img/authorization/money_gun_logo.png" alt="">
+                        <div class="referral_link_text"><span>Как это работает?</span></div>
+                    </div>
+                    <div class="distance_index"></div>
+                    <div class="wrapper_index_text">
+                        <div class="index_main_text">
+                            Вы арендуете один из восьми наших серверов. Каждый сервер отличается скоростью и мощьностью майнинга.
+                            Чем дороже стоимость сервер, тем больше он приносит вам прибыль.
+                        </div>
+                        <div class="index_main_text">
+                            Переодически сервера могут отключаться
+                            из-за больших нагрузок, но это не страшно. Перезагрузка серверов происходит в течении 1-2 часов.
+                            Вы так же можете арендовать один или более серверов одновременно. В таком случаи ваши доходы многократно возрастут.
+                            Ваши доходы начисляются ежедневно в 12:00 по Киевскому времени. Вы можете пополнять и выводить заработанные
+                            USDT в любое удобное для вас время с Пн-Пт с 9:00 до 20:00.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="header_index">
+                    <img src="/static/main/img/instraction/maining_ferma_2.png">
+                    <div class="main_index_text">
+                        <div class="form_index_link">
+                            <img src="/static/main/img/authorization/money_gun_logo.png" alt="">
+                            <div class="index_link_text">Твоя команда</div>
+                        </div>
+                        <div class="wrapper_index_text">
+                            <div class="index_header_text">Вы так же можете собрать собственную комманду.</div>
+                            <div class="index_header_text">В таком случаи ваши доходы многократно </div>
+                            <div class="index_header_text">возрастут. Доход от одго члена комманды</div>
+                            <div class="index_header_text">составляет 10% от каждой его майнинг фермы.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="index_button">
+                    <a href="/products/">Начать майнить</a>
+                </div>
+
+            </div>
+        </div>
+
+
+{% endblock %}

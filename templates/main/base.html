@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+
+        <!--    CSS here    -->
+        <link type="text/css" rel="stylesheet" href="{% static 'main/css/style.css' %}?v=0.0.1">
+
+        {% block css %}
+
+        {% endblock %}
+
+    </head>
+
+    <body>
+
+        {% block content %}
+
+        {% endblock %}
+
+        <!--    jQuery here    -->
+        <script type="text/javascript" src="{% static 'main/js/jquery-3.6.1.min.js' %}"></script>
+
+        <!--    JavaScript here    -->
+        <script type="text/javascript" src="{% static 'main/js/script.js' %}?v=0.0.1"></script>
+
+        {% block javascript %}
+
+        {% endblock %}
+
+    </body>
+
+</html>

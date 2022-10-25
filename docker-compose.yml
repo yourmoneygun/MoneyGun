@@ -1,0 +1,97 @@
+version: "3.8"
+
+services:
+  money_gun_app:
+    build: ./
+    container_name: money_gun_container
+    working_dir: /money_gun
+    command: ./commands/start_server_${MODE}.sh
+    volumes:
+      - ./commands:/money_gun/commands
+      - ./main:/money_gun/main
+      - ./money_gun:/money_gun/money_gun
+      - ./static:/money_gun/static
+      - ./templates:/money_gun/templates
+      - ./manage.py:/money_gun/manage.py
+      - ./requirements.txt:/money_gun/requirements.txt
+      - static_content:/money_gun/static
+      - media_content:/money_gun/media
+    ports:
+      - "${PORT}:${WSGI_PORT}"
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+
+
+  nginx:
+    image: nginx:1.19
+    volumes:
+      - static_content:/money_gun/static
+      - media_content:/money_gun/media
+      - ./nginx:/etc/nginx/conf.d
+    ports:
+      - 80:80
+      - 443:443
+    env_file:
+      - .env
+    depends_on:
+      - money_gun_app
+
+
+  postgres:
+    image: postgres:14.5
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+
+
+  redis:
+    image: redis
+    restart: always
+    env_file:
+      .env
+
+
+  celery:
+    build: ./
+    command: ./commands/start_celery.sh
+    restart: always
+    volumes:
+      - ./commands:/money_gun/commands
+      - ./main:/money_gun/main
+      - ./money_gun:/money_gun/money_gun
+      - ./templates:/money_gun/templates
+      - ./manage.py:/money_gun/manage.py
+      - ./requirements.txt:/money_gun/requirements.txt
+    env_file:
+      - .env
+    depends_on:
+      - redis
+
+
+  celerybeat:
+    build: .
+    container_name: celerybeat
+    command: ./commands/start_celerybeat.sh
+    restart: always
+    env_file: .env
+    volumes:
+      - ./commands:/money_gun/commands
+      - ./main:/money_gun/main
+      - ./money_gun:/money_gun/money_gun
+      - ./templates:/money_gun/templates
+      - ./manage.py:/money_gun/manage.py
+      - ./requirements.txt:/money_gun/requirements.txt
+    depends_on:
+      - redis
+      - celery
+
+
+volumes:
+  pg_data: { }
+  static_content: { }
+  media_content: { }
