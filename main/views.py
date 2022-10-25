@@ -28,7 +28,7 @@ from main.services.transaction_number import create_transaction_number
 
 # Main Page
 class Index(LoginRequiredMixin, TemplateView):
-    template_name = 'main/index.html'
+    template_name = 'main/moneygun.html'
 
 
 # Registration Page
