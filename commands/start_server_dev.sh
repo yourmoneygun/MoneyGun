@@ -12,4 +12,4 @@ echo "!!! CREATE SUPER USER !!!"
 python manage.py create_super_user
 
 echo "!!! RUN SERVER !!!"
-python manage.py runserver --settings=money_gun.settings.${MODE} 0:${WSGI_PORT}
+gunicorn -w ${WSGI_WORKERS} -b 0:${WSGI_PORT} money_gun.wsgi:application --log-level=${WSGI_LOG_LEVEL}
