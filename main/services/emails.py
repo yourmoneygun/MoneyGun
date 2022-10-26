@@ -26,7 +26,6 @@ def send_registration_email(request, user_instance):
         }
     )
 
-    # Body Email
     email = EmailMessage(
         subject=mail_subject,
         body=message,
@@ -35,4 +34,4 @@ def send_registration_email(request, user_instance):
 
     email.content_subtype = 'html'
 
-    email.send(fail_silently=False)
+    email.send(fail_silently=True)

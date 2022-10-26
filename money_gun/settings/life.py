@@ -1,6 +1,6 @@
 from money_gun.settings.base import *  # noqa:
 
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['moneygun.online']
