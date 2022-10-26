@@ -88,10 +88,10 @@ class RegistrationUser(CreateView):
 
                     Referral.objects.create(main_user=self.user, referral_user=self.ref_user)
 
-                # send_registration_email(
-                #     request=request,
-                #     user_instance=self.obj,
-                # )
+                send_registration_email(
+                    request=request,
+                    user_instance=self.obj,
+                )
 
                 return HttpResponseRedirect(reverse_lazy('pre_activate'))
 
@@ -171,7 +171,7 @@ class LoginUser(LoginView):
 
             if not self.user.is_active:
                 send_registration_email(
-                    request=self.request,
+                    request=request,
                     user_instance=self.user
                 )
                 form.error_messages = {
