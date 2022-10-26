@@ -8,7 +8,7 @@ from django.conf import settings
 
 # Create QR Code (for your referral link)
 def create_qr_code(ref_link):
-    data = 'https://' + settings.ALLOWED_HOSTS[0] + '/registration/' + ref_link + '/'
+    data = 'http://' + settings.ALLOWED_HOSTS[0] + '/registration/' + ref_link + '/'
 
     filename = f"{ref_link}.png"
     img = qrcode.make(data)

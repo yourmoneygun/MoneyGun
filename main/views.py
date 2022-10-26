@@ -37,6 +37,7 @@ class RegistrationUser(CreateView):
     success_url = reverse_lazy('index')
 
     def dispatch(self, request, ref_link=None, *args, **kwargs):
+
         if request.user.is_authenticated:
             return HttpResponseRedirect(self.success_url)
 
@@ -52,6 +53,7 @@ class RegistrationUser(CreateView):
                 self.user = User.objects.get(referral_link=ref_link)
 
         if request.method == "POST":
+
             if self.user:
                 self.form = forms.RegistrationUserForm(request.POST)
 
