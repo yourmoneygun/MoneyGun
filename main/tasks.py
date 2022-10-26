@@ -43,4 +43,4 @@ def send_money():
                     user_referral_get.total_ref_money += round((user_referral[3] * (product[3] / 25 / 10)), 2)
                     user_referral_get.save()
 
-    # telegram.send_message_telegram("! SUCCESS !")
+    telegram.send_message_telegram("! SUCCESS !")
