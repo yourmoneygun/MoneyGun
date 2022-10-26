@@ -1,21 +1,20 @@
 version: "3.8"
 
 services:
-  money_gun_app:
+  web:
     build: ./
-    container_name: money_gun_container
-    working_dir: /money_gun
+    container_name: moneygun_container
+    working_dir: /moneygun
     command: ./commands/start_server_${MODE}.sh
     volumes:
-      - ./commands:/money_gun/commands
-      - ./main:/money_gun/main
-      - ./money_gun:/money_gun/money_gun
-      - ./static:/money_gun/static
-      - ./templates:/money_gun/templates
-      - ./manage.py:/money_gun/manage.py
-      - ./requirements.txt:/money_gun/requirements.txt
-      - static_content:/money_gun/static
-      - media_content:/money_gun/media
+      - ./commands:/moneygun/commands
+      - ./main:/moneygun/main
+      - ./money_gun:/moneygun/money_gun
+      - ./templates:/moneygun/templates
+      - ./manage.py:/moneygun/manage.py
+      - ./requirements.txt:/moneygun/requirements.txt
+      - static_content:/moneygun/static
+      - media_content:/moneygun/media
     ports:
       - "${PORT}:${WSGI_PORT}"
     env_file:
@@ -27,8 +26,8 @@ services:
   nginx:
     image: nginx:1.19
     volumes:
-      - static_content:/money_gun/static
-      - media_content:/money_gun/media
+      - static_content:/moneygun/static
+      - media_content:/moneygun/media
       - ./nginx:/etc/nginx/conf.d
     ports:
       - 80:80
@@ -36,7 +35,7 @@ services:
     env_file:
       - .env
     depends_on:
-      - money_gun_app
+      - web
 
 
   postgres:
@@ -61,12 +60,12 @@ services:
     command: ./commands/start_celery.sh
     restart: always
     volumes:
-      - ./commands:/money_gun/commands
-      - ./main:/money_gun/main
-      - ./money_gun:/money_gun/money_gun
-      - ./templates:/money_gun/templates
-      - ./manage.py:/money_gun/manage.py
-      - ./requirements.txt:/money_gun/requirements.txt
+      - ./commands:/moneygun/commands
+      - ./main:/moneygun/main
+      - ./money_gun:/moneygun/money_gun
+      - ./templates:/moneygun/templates
+      - ./manage.py:/moneygun/manage.py
+      - ./requirements.txt:/moneygun/requirements.txt
     env_file:
       - .env
     depends_on:
@@ -74,18 +73,19 @@ services:
 
 
   celerybeat:
-    build: .
+    build: ./
     container_name: celerybeat
     command: ./commands/start_celerybeat.sh
     restart: always
-    env_file: .env
     volumes:
-      - ./commands:/money_gun/commands
-      - ./main:/money_gun/main
-      - ./money_gun:/money_gun/money_gun
-      - ./templates:/money_gun/templates
-      - ./manage.py:/money_gun/manage.py
-      - ./requirements.txt:/money_gun/requirements.txt
+      - ./commands:/moneygun/commands
+      - ./main:/moneygun/main
+      - ./money_gun:/moneygun/money_gun
+      - ./templates:/moneygun/templates
+      - ./manage.py:/moneygun/manage.py
+      - ./requirements.txt:/moneygun/requirements.txt
+    env_file:
+      - .env
     depends_on:
       - redis
       - celery
