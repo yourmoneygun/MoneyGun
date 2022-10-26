@@ -34,4 +34,4 @@ def send_registration_email(request, user_instance):
 
     email.content_subtype = 'html'
 
-    email.send(fail_silently=True)
+    email.send(fail_silently=False)
