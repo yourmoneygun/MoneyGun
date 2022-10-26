@@ -26,6 +26,7 @@ def send_registration_email(request, user_instance):
         }
     )
 
+    # Body Email
     email = EmailMessage(
         subject=mail_subject,
         body=message,

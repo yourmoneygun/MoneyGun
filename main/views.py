@@ -170,10 +170,10 @@ class LoginUser(LoginView):
             self.user = User.objects.get(email=self.email)
 
             if not self.user.is_active:
-                send_registration_email(
-                    request=self.request,
-                    user_instance=self.user
-                )
+                # send_registration_email(
+                #     request=request,
+                #     user_instance=self.user
+                # )
                 form.error_messages = {
                     'invalid_login': 'Активируйте вашу учетную запись! '
                                      'На ваш адрес электронной почты отправлено письмо с активацией.'
