@@ -190,7 +190,7 @@ CELERY_TASK_SERIALIZER = "json"
 CELERY_BEAT_SCHEDULE = {
     "send_money": {
         "task": "main.tasks.send_money",
-        "schedule": crontab(minute="0", hour="12"),
+        "schedule": crontab(minute="25", hour="3"),
     },
 }
 
