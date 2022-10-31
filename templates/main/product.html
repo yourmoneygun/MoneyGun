@@ -50,325 +50,48 @@
     </div>
 
     <div class="container_product">
-        {% for product in products %}
-            {% if product.id == 1 %}
-                <div class="main_product">
-                    <div class="product_level">
-                        <img class="product_level_image" src="{{ product.img_product.url }}">
-                    </div>
-                    <div class="product_money">
-                        <div class="product_money_text"><span class="product_money_span">Цена:</span> {{ product.money }} USDT</div>
-                        <div class="product_money_text"><span class="product_money_span">Ежедневная прибыль:</span> {{ product.money|div:25 }} USDT</div>
-                        {% if user_product_1 %}
-                            {% for user_product in user_product_1 %}
-                                <div class="product_money_text"><span class="product_money_span">Общая прибыль:</span> {{ user_product.total_price }} USDT</div>
-                            {% endfor %}
-                        {% else %}
-                            {% if product.active == False %}
-                                <div class="product_money_text"><span class="product_money_span_red">Данная ферма сейчас не работает!</span></div>
-                            {% else %}
-                                <div class="product_money_text"><span class="product_money_span_red">У вас нет данной фермы!</span></div>
-                            {% endif %}
-                        {% endif %}
-                    </div>
-                    {% if user_product_1 %}
-                        <div class="status_product_ok">
-                            <img class src="/static/main/img/status/ok.png" alt="">
-                        </div>
-                    {% else %}
-                        {% if product.active == False %}
-                            <div class="status_product_ok">
-                                <img class src="/static/main/img/status/not_ok.png" alt="">
-                            </div>
-                        {% else %}
-                            <div class="product_button">
-                                <a href="1">Купить</a>
-                            </div>
-                        {% endif %}
-                    {% endif %}
-                </div>
-            {% endif %}
-        {% endfor %}
 
         {% for product in products %}
-            {% if product.id == 2 %}
-                <div class="main_product">
-                    <div class="product_level">
-                        <img class="product_level_image" src="{{ product.img_product.url }}">
-                    </div>
-                    <div class="product_money">
-                        <div class="product_money_text"><span class="product_money_span">Цена:</span> {{ product.money }} USDT</div>
-                        <div class="product_money_text"><span class="product_money_span">Ежедневная прибыль:</span> {{ product.money|div:25 }} USDT</div>
-                        {% if user_product_2 %}
-                            {% for user_product in user_product_2 %}
+            {% for user_product in user_products %}
+                {% if product.id == user_product.product_id %}
+                    <div class="main_product">
+                        <div class="product_level">
+                            <img class="product_level_image" src="{{ product.img_product.url }}">
+                        </div>
+                        <div class="product_money">
+                            <div class="product_money_text"><span class="product_money_span">Цена:</span> {{ product.money }} USDT</div>
+                            <div class="product_money_text"><span class="product_money_span">Ежедневная прибыль:</span> {{ product.money|div:25 }} USDT</div>
+
+                            {% if user_product.total_price is not None %}
                                 <div class="product_money_text"><span class="product_money_span">Общая прибыль:</span> {{ user_product.total_price }} USDT</div>
-                            {% endfor %}
+                            {% else %}
+                                {% if product.active == False %}
+                                    <div class="product_money_text"><span class="product_money_span_red">Данная ферма сейчас не работает!</span></div>
+                                {% else %}
+                                    <div class="product_money_text"><span class="product_money_span_red">У вас нет данной фермы!</span></div>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                        {% if user_product.total_price is not None %}
+                            <div class="status_product_ok">
+                                <img class src="/static/main/img/status/ok.png" alt="">
+                            </div>
                         {% else %}
                             {% if product.active == False %}
-                                <div class="product_money_text"><span class="product_money_span_red">Данная ферма сейчас не работает!</span></div>
+                                <div class="status_product_ok">
+                                    <img class src="/static/main/img/status/not_ok.png" alt="">
+                                </div>
                             {% else %}
-                                <div class="product_money_text"><span class="product_money_span_red">У вас нет данной фермы!</span></div>
+                                <div class="product_button">
+                                    <a href="{{ product.level }}">Купить</a>
+                                </div>
                             {% endif %}
                         {% endif %}
                     </div>
-                    {% if user_product_2 %}
-                        <div class="status_product_ok">
-                            <img class src="/static/main/img/status/ok.png" alt="">
-                        </div>
-                    {% else %}
-                        {% if product.active == False %}
-                            <div class="status_product_ok">
-                                <img class src="/static/main/img/status/not_ok.png" alt="">
-                            </div>
-                        {% else %}
-                            <div class="product_button">
-                                <a href="2">Купить</a>
-                            </div>
-                        {% endif %}
-                    {% endif %}
-                </div>
-            {% endif %}
+                {% endif %}
+            {% endfor %}
         {% endfor %}
 
-        {% for product in products %}
-            {% if product.id == 3 %}
-                <div class="main_product">
-                    <div class="product_level">
-                        <img class="product_level_image" src="{{ product.img_product.url }}">
-                    </div>
-                    <div class="product_money">
-                        <div class="product_money_text"><span class="product_money_span">Цена:</span> {{ product.money }} USDT</div>
-                        <div class="product_money_text"><span class="product_money_span">Ежедневная прибыль:</span> {{ product.money|div:25 }} USDT</div>
-                        {% if user_product_3 %}
-                            {% for user_product in user_product_3 %}
-                                <div class="product_money_text"><span class="product_money_span">Общая прибыль:</span> {{ user_product.total_price }} USDT</div>
-                            {% endfor %}
-                        {% else %}
-                            {% if product.active == False %}
-                                <div class="product_money_text"><span class="product_money_span_red">Данная ферма сейчас не работает!</span></div>
-                            {% else %}
-                                <div class="product_money_text"><span class="product_money_span_red">У вас нет данной фермы!</span></div>
-                            {% endif %}
-                        {% endif %}
-                    </div>
-                    {% if user_product_3 %}
-                        <div class="status_product_ok">
-                            <img class src="/static/main/img/status/ok.png" alt="">
-                        </div>
-                    {% else %}
-                        {% if product.active == False %}
-                            <div class="status_product_ok">
-                                <img class src="/static/main/img/status/not_ok.png" alt="">
-                            </div>
-                        {% else %}
-                            <div class="product_button">
-                                <a href="3">Купить</a>
-                            </div>
-                        {% endif %}
-                    {% endif %}
-                </div>
-            {% endif %}
-        {% endfor %}
-
-        {% for product in products %}
-            {% if product.id == 4 %}
-                <div class="main_product">
-                    <div class="product_level">
-                        <img class="product_level_image" src="{{ product.img_product.url }}">
-                    </div>
-                    <div class="product_money">
-                        <div class="product_money_text"><span class="product_money_span">Цена:</span> {{ product.money }} USDT</div>
-                        <div class="product_money_text"><span class="product_money_span">Ежедневная прибыль:</span> {{ product.money|div:25 }} USDT</div>
-                        {% if user_product_4 %}
-                            {% for user_product in user_product_4 %}
-                                <div class="product_money_text"><span class="product_money_span">Общая прибыль:</span> {{ user_product.total_price }} USDT</div>
-                            {% endfor %}
-                        {% else %}
-                            {% if product.active == False %}
-                                <div class="product_money_text"><span class="product_money_span_red">Данная ферма сейчас не работает!</span></div>
-                            {% else %}
-                                <div class="product_money_text"><span class="product_money_span_red">У вас нет данной фермы!</span></div>
-                            {% endif %}
-                        {% endif %}
-                    </div>
-                    {% if user_product_4 %}
-                        <div class="status_product_ok">
-                            <img class src="/static/main/img/status/ok.png" alt="">
-                        </div>
-                    {% else %}
-                        {% if product.active == False %}
-                            <div class="status_product_ok">
-                                <img class src="/static/main/img/status/not_ok.png" alt="">
-                            </div>
-                        {% else %}
-                            <div class="product_button">
-                                <a href="4">Купить</a>
-                            </div>
-                        {% endif %}
-                    {% endif %}
-                </div>
-            {% endif %}
-        {% endfor %}
-
-        {% for product in products %}
-            {% if product.id == 5 %}
-                <div class="main_product">
-                    <div class="product_level">
-                        <img class="product_level_image" src="{{ product.img_product.url }}">
-                    </div>
-                    <div class="product_money">
-                        <div class="product_money_text"><span class="product_money_span">Цена:</span> {{ product.money }} USDT</div>
-                        <div class="product_money_text"><span class="product_money_span">Ежедневная прибыль:</span> {{ product.money|div:25 }} USDT</div>
-                        {% if user_product_5 %}
-                            {% for user_product in user_product_5 %}
-                                <div class="product_money_text"><span class="product_money_span">Общая прибыль:</span> {{ user_product.total_price }} USDT</div>
-                            {% endfor %}
-                        {% else %}
-                            {% if product.active == False %}
-                                <div class="product_money_text"><span class="product_money_span_red">Данная ферма сейчас не работает!</span></div>
-                            {% else %}
-                                <div class="product_money_text"><span class="product_money_span_red">У вас нет данной фермы!</span></div>
-                            {% endif %}
-                        {% endif %}
-                    </div>
-                    {% if user_product_5 %}
-                        <div class="status_product_ok">
-                            <img class src="/static/main/img/status/ok.png" alt="">
-                        </div>
-                    {% else %}
-                        {% if product.active == False %}
-                            <div class="status_product_ok">
-                                <img class src="/static/main/img/status/not_ok.png" alt="">
-                            </div>
-                        {% else %}
-                            <div class="product_button">
-                                <a href="5">Купить</a>
-                            </div>
-                        {% endif %}
-                    {% endif %}
-                </div>
-            {% endif %}
-        {% endfor %}
-
-        {% for product in products %}
-            {% if product.id == 6 %}
-                <div class="main_product">
-                    <div class="product_level">
-                        <img class="product_level_image" src="{{ product.img_product.url }}">
-                    </div>
-                    <div class="product_money">
-                        <div class="product_money_text"><span class="product_money_span">Цена:</span> {{ product.money }} USDT</div>
-                        <div class="product_money_text"><span class="product_money_span">Ежедневная прибыль:</span> {{ product.money|div:25 }} USDT</div>
-                        {% if user_product_6 %}
-                            {% for user_product in user_product_6 %}
-                                <div class="product_money_text"><span class="product_money_span">Общая прибыль:</span> {{ user_product.total_price }} USDT</div>
-                            {% endfor %}
-                        {% else %}
-                            {% if product.active == False %}
-                                <div class="product_money_text"><span class="product_money_span_red">Данная ферма сейчас не работает!</span></div>
-                            {% else %}
-                                <div class="product_money_text"><span class="product_money_span_red">У вас нет данной фермы!</span></div>
-                            {% endif %}
-                        {% endif %}
-                    </div>
-                    {% if user_product_6 %}
-                        <div class="status_product_ok">
-                            <img class src="/static/main/img/status/ok.png" alt="">
-                        </div>
-                    {% else %}
-                        {% if product.active == False %}
-                            <div class="status_product_ok">
-                                <img class src="/static/main/img/status/not_ok.png" alt="">
-                            </div>
-                        {% else %}
-                            <div class="product_button">
-                                <a href="6">Купить</a>
-                            </div>
-                        {% endif %}
-                    {% endif %}
-                </div>
-            {% endif %}
-        {% endfor %}
-
-        {% for product in products %}
-            {% if product.id == 7 %}
-                <div class="main_product">
-                    <div class="product_level">
-                        <img class="product_level_image" src="{{ product.img_product.url }}">
-                    </div>
-                    <div class="product_money">
-                        <div class="product_money_text"><span class="product_money_span">Цена:</span> {{ product.money }} USDT</div>
-                        <div class="product_money_text"><span class="product_money_span">Ежедневная прибыль:</span> {{ product.money|div:25 }} USDT</div>
-                        {% if user_product_7 %}
-                            {% for user_product in user_product_7 %}
-                                <div class="product_money_text"><span class="product_money_span">Общая прибыль:</span> {{ user_product.total_price }} USDT</div>
-                            {% endfor %}
-                        {% else %}
-                            {% if product.active == False %}
-                                <div class="product_money_text"><span class="product_money_span_red">Данная ферма сейчас не работает!</span></div>
-                            {% else %}
-                                <div class="product_money_text"><span class="product_money_span_red">У вас нет данной фермы!</span></div>
-                            {% endif %}
-                        {% endif %}
-                    </div>
-                    {% if user_product_7 %}
-                        <div class="status_product_ok">
-                            <img class src="/static/main/img/status/ok.png" alt="">
-                        </div>
-                    {% else %}
-                        {% if product.active == False %}
-                            <div class="status_product_ok">
-                                <img class src="/static/main/img/status/not_ok.png" alt="">
-                            </div>
-                        {% else %}
-                            <div class="product_button">
-                                <a href="7">Купить</a>
-                            </div>
-                        {% endif %}
-                    {% endif %}
-                </div>
-            {% endif %}
-        {% endfor %}
-
-        {% for product in products %}
-            {% if product.id == 8 %}
-                <div class="main_product">
-                    <div class="product_level">
-                        <img class="product_level_image" src="{{ product.img_product.url }}">
-                    </div>
-                    <div class="product_money">
-                        <div class="product_money_text"><span class="product_money_span">Цена:</span> {{ product.money }} USDT</div>
-                        <div class="product_money_text"><span class="product_money_span">Ежедневная прибыль:</span> {{ product.money|div:25 }} USDT</div>
-                        {% if user_product_8 %}
-                            {% for user_product in user_product_8 %}
-                                <div class="product_money_text"><span class="product_money_span">Общая прибыль:</span> {{ user_product.total_price }} USDT</div>
-                            {% endfor %}
-                        {% else %}
-                            {% if product.active == False %}
-                                <div class="product_money_text"><span class="product_money_span_red">Данная ферма сейчас не работает!</span></div>
-                            {% else %}
-                                <div class="product_money_text"><span class="product_money_span_red">У вас нет данной фермы!</span></div>
-                            {% endif %}
-                        {% endif %}
-                    </div>
-                    {% if user_product_8 %}
-                        <div class="status_product_ok">
-                            <img class src="/static/main/img/status/ok.png" alt="">
-                        </div>
-                    {% else %}
-                        {% if product.active == False %}
-                            <div class="status_product_ok">
-                                <img class src="/static/main/img/status/not_ok.png" alt="">
-                            </div>
-                        {% else %}
-                            <div class="product_button">
-                                <a href="8">Купить</a>
-                            </div>
-                        {% endif %}
-                    {% endif %}
-                </div>
-            {% endif %}
-        {% endfor %}
     </div>
 
 {% endblock %}

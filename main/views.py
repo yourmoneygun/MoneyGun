@@ -140,7 +140,7 @@ class ActivateUser(RedirectView):
             current_user = User.objects.get(pk=user_pk)
 
         except (User.DoesNotExist, ValueError, TypeError):
-            return HttpResponseRedirect(reverse_lazy('page_not_found_404'))
+            return HttpResponseRedirect(reverse_lazy('page_not_found'))
 
         if current_user and TokenGenerator().check_token(current_user, token):
             current_user.is_active = True
@@ -148,7 +148,7 @@ class ActivateUser(RedirectView):
             login(request, current_user)
             return super().get(request, *args, **kwargs)
 
-        return HttpResponseRedirect(reverse_lazy('page_not_found_404'))
+        return HttpResponseRedirect(reverse_lazy('page_not_found'))
 
 
 # LogIn Page
@@ -229,20 +229,19 @@ class ProductUser(LoginRequiredMixin, TemplateView):
             self.product = Product.objects.filter(id=product)
 
             if not self.product:
-                return HttpResponseRedirect(reverse_lazy('page_not_found_404'))
+                return HttpResponseRedirect(reverse_lazy('page_not_found'))
 
             self.product = Product.objects.get(id=product)
             self.user_products = UserProduct.objects.filter(product=self.product, user=request.user)
 
             if not self.product.active:
-                return HttpResponseRedirect(reverse_lazy('page_not_found_404'))
+                return HttpResponseRedirect(reverse_lazy('page_not_found'))
 
             if self.user_products:
-                return HttpResponseRedirect(reverse_lazy('page_not_found_404'))
+                return HttpResponseRedirect(reverse_lazy('page_not_found'))
 
             if request.user.money >= self.product.money:
                 self.user_ref_link = request.user.referral_link_main_user
-
                 self.user = User.objects.get(id=request.user.pk)
                 self.user.money -= self.product.money
                 self.user.save()
@@ -260,19 +259,35 @@ class ProductUser(LoginRequiredMixin, TemplateView):
                         UserReferralTotal.objects.create(product=self.product, user=self.user_ref_main, total_ref_user=1)
 
                 UserProduct.objects.create(product=self.product, user=request.user)
+
                 return HttpResponseRedirect(reverse_lazy('product'))
 
             else:
                 return HttpResponseRedirect(reverse_lazy('send'))
 
-        self.products = Product.objects.all()
+        self.products = Product.objects.all().order_by('level')
+        self.user_products = list()
+
+        for pk in range(1, len(self.products) + 1):
+            self.user_product = UserProduct.objects.filter(product=pk, user=request.user.pk)
+
+            if self.user_product:
+                for item in self.user_product.values_list():
+                    self.user_products.append({
+                        'product_id': pk,
+                        'total_price': item[3],
+                    })
+
+            else:
+                self.user_products.append({
+                    'product_id': pk,
+                    'total_price': None,
+                })
 
         context = {
             'products': self.products,
+            'user_products': self.user_products,
         }
-
-        for pk in range(1, 9):
-            context[f'user_product_{pk}'] = UserProduct.objects.filter(product=pk, user=request.user.pk)
 
         return render(
             request,
@@ -291,14 +306,33 @@ class ReferralUser(LoginRequiredMixin, TemplateView):
     template_name = 'main/referral.html'
 
     def get(self, request, *args, **kwargs):
-        self.products = Product.objects.all()
+
+        self.products = Product.objects.all().order_by('level')
+        self.user_ref_products = list()
+
+        for pk in range(1, len(self.products) + 1):
+            self.user_ref_product = UserReferralTotal.objects.filter(product=pk, user=request.user.pk)
+
+            if self.user_ref_product:
+
+                for item in self.user_ref_product.values_list():
+                    self.user_ref_products.append({
+                        'product_id': pk,
+                        'total_ref_user': item[3],
+                        'total_ref_money': item[4],
+                    })
+
+            else:
+                self.user_ref_products.append({
+                    'product_id': pk,
+                    'total_ref_user': None,
+                    'total_ref_money': None,
+                })
 
         context = {
             'products': self.products,
+            'user_ref_products': self.user_ref_products,
         }
-
-        for pk in range(1, 9):
-            context[f'user_ref_product_{pk}'] = UserReferralTotal.objects.filter(product=pk, user=request.user.pk)
 
         return self.render_to_response(context)
 
@@ -448,7 +482,7 @@ class TransactionProcessing(LoginRequiredMixin, TemplateView):
     def dispatch(self, request, *args, **kwargs):
 
         if not request.user.is_superuser:
-            return HttpResponseRedirect(reverse_lazy('page_not_found_404'))
+            return HttpResponseRedirect(reverse_lazy('page_not_found'))
 
         self.user_transactions = Transaction.objects.all().order_by('-id')
 
@@ -469,7 +503,7 @@ class TransactionProcessingPk(LoginRequiredMixin, UpdateView):
     def dispatch(self, request, pk=None, *args, **kwargs):
 
         if not request.user.is_superuser:
-            return HttpResponseRedirect(reverse_lazy('page_not_found_404'))
+            return HttpResponseRedirect(reverse_lazy('page_not_found'))
 
         self.pk = None
         self.user = None
@@ -530,7 +564,7 @@ class TransactionProcessingUnsuccess(LoginRequiredMixin, TemplateView):
     def dispatch(self, request, pk=None, *args, **kwargs):
 
         if not request.user.is_superuser:
-            return HttpResponseRedirect(reverse_lazy('page_not_found_404'))
+            return HttpResponseRedirect(reverse_lazy('page_not_found'))
 
         if pk:
             self.pk = Transaction.objects.get(id=pk)
