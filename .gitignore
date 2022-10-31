@@ -28,6 +28,8 @@ share/python-wheels/
 MANIFEST
 .idea/
 media/
+test.py
+web3_test.py
 
 
 # PyInstaller

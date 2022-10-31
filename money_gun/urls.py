@@ -47,7 +47,7 @@ urlpatterns = [
     path('account/instruction/', views.InstructionUser.as_view(), name='instruction'),
     path('account/change_password/', views.ChangePasswordUser.as_view(), name='password_change'),
     path('account/change_password/done/', views.ChangePasswordDoneUser.as_view(), name='password_change_done'),
-    path('page_not_found_404/', views.PageNotFound.as_view(), name='page_not_found_404'),
+    path('page_not_found/', views.PageNotFound.as_view(), name='page_not_found'),
 
     # For Only SuperUser
     path('money_gun_administration/', admin.site.urls),

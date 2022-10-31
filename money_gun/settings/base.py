@@ -168,14 +168,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'yourmoneygun@gmail.com'
-EMAIL_HOST_PASSWORD = 'vqzywsodazbpmebb'
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 EMAIL_PORT = 587
 
 
 # Telegram Bot Token
-BOT_TELEGRAM_ID = '5532974768'
-BOT_TELEGRAM_TOKEN = '5753599386:AAE2ipWawE4eow45Sb7Uah0XrYt-ARslBC0'
+BOT_TELEGRAM_ID = os.environ['BOT_TELEGRAM_ID']
+BOT_TELEGRAM_TOKEN = os.environ['BOT_TELEGRAM_TOKEN']
 
 
 # Celery
