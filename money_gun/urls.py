@@ -26,7 +26,6 @@ from main import views
 
 urlpatterns = [
     path('', views.Index.as_view(), name='index'),
-    path('index/', views.Index.as_view(), name='index'),
     path('registration/', views.RegistrationUser.as_view(), name='registration'),
     path('registration/<str:ref_link>/', views.RegistrationUser.as_view(), name='registration_referral'),
     path('preactivate/', views.PreActivateUser.as_view(), name='pre_activate'),
