@@ -59,13 +59,14 @@
                 <div class="account_user_text"><span>Ваша команда:</span> {{ total_ref_user }} чел.</div>
                 <div class="account_user_text"><span>Прибыль от команды:</span> {{ total_ref_money }} USDT</div>
             </div>
+
             <div class="header_referral_link">
                 <div class="form_referral_link">
                     <img class="form_image_referral_link" src="/static/main/img/authorization/money_gun_logo.png" alt="">
                     <div class="referral_link_text">Пригласить в команду</div>
                     <div class="qr_code_image"><img src="{{ user.referral_link_qr_code.url }}"></div>
                     <div class="referral_code">{{ user.referral_link }}</div>
-                    <div class="referral_link_text_redirect"><a href="https://{{ url }}/registration/{{ user.referral_link }}/">https://*/registration/{{ user.referral_link }}/</a></div>
+                    <div class="referral_link_text_redirect"><a href="http://moneygun.online/registration/{{ user.referral_link }}/">http://moneygun.online/registration/{{ user.referral_link }}/</a></div>
                 </div>
             </div>
 
